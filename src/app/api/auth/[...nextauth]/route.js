@@ -46,7 +46,26 @@ const authorize = async (credentials) => {
 
 const handler = NextAuth(
   {
-  // Configure one or more authentication providers
+    // set custom session token expiration
+    session: {
+      strategy: "jwt",
+      maxAge: 25 * 60
+    },
+      callbacks: {
+    async jwt({ token, user }) {
+    if (user) {
+      token.id = user.id;
+      token.email = user.email;
+    }
+    return token;
+  },
+  async session({ session, token, user }) {
+    if (token) {
+      session.user.id = token.id
+    }
+    return session;
+  },
+},
     providers: [
     CredentialsProvider({
     // The name to display on the sign in form (e.g. 'Sign in with...')
@@ -63,33 +82,6 @@ const handler = NextAuth(
           return await authorize(credentials)
         }
       ,
-      session: {
-        strategy: "jwt"
-      },
-      jwt: {
-        maxAge: 60 * 2
-      },
-        callbacks: {
-  async jwt({ token, user }) {
-    if (user) {
-      token.id = user.id;
-      token.email = user.email;
-    }
-    return token;
-  },
-  async session({ session, token }) {
-    if (token) {
-      session.user = {
-        id: token.id,
-        email: token.email,
-        name: session.user.name,
-      };
-    }
-    return session;
-  },
-},
-
-
     }),
       
     // EmailProvider({

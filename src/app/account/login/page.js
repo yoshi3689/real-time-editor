@@ -14,7 +14,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   useEffect(() => {
-  if (status === 'authenticated') {
+    console.log(session, "hello")
+    if (status === 'authenticated') {
     setTimeout(() => {
       router.push('/protected');
     }, 1000);
