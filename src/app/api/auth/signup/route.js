@@ -1,64 +1,80 @@
-import { v4 as uuidv4 } from 'uuid';
-import bcrypt from "bcrypt"
-import { PrismaClient } from '@prisma/client';
-import { sendVerificationEmail } from "@/utils/sendEmailVerification"
-import validate from 'deep-email-validator';
+import bcrypt from "bcrypt";
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export async function POST(request) {
   try {
     const { email, username, password, name } = await request.json();
-    // Validate input
+
+    // Validate input fields
     if (!email || !username || !password || !name) {
-      // deep-validate email address
-      let errorResponseMessage = 'All fields are required';
-      const mailValidationRes = await validate(email)
-      if (!mailValidationRes.valid) {
-        errorResponseMessage = 'invalid email address';
-      }
-      return new Response(JSON.stringify({ error: errorResponseMessage }), {
-        status: 401,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return new Response(
+        JSON.stringify({ error: "All fields are required" }),
+        { status: 400 }
+      );
     }
 
-  const userId = uuidv4(); // Generate a unique ID
+    // Check if the email or username already exists
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { email },
+          { username },
+        ],
+      },
+    });
+    if (existingUser) {
+      return new Response(
+        JSON.stringify({ error: "Email or username is already registered" }),
+        { status: 400 }
+      );
+    }
+
+    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create the user in the database
     const newUser = await prisma.user.create({
       data: {
-        id: userId,
         email,
         username,
         password: hashedPassword,
         name,
-        isVerificationEmailSent: false,
-        isEmailVerified: false
+        emailVerified: null, // Email verification is handled by NextAuth
+        isVerificationEmailSent: false, // Optional field for custom logic
       },
     });
-    
-    // Simplified utility call
-    await sendVerificationEmail({ email: newUser.email, name: newUser.name });
 
-    // Update the user to indicate the email has been sent
-    await prisma.user.update({
-      where: { email: newUser.email },
-      data: { isVerificationEmailSent: true },
-    });
+    // Optionally, you can send a verification email here
+    // Example: await sendVerificationEmail({ email: newUser.email, name: newUser.name });
 
-    return new Response(JSON.stringify(newUser), { status: 201 });
-    
-  } catch (error) {
-    if (error.code === 'P2002') {
+    // Respond with success
     return new Response(
-      JSON.stringify({ error: 'Email or username already exists' }),
-      { status: 400 }
+      JSON.stringify({
+        message: "User registered successfully",
+        user: {
+          email: newUser.email,
+          username: newUser.username,
+          name: newUser.name,
+        },
+      }),
+      { status: 201 }
     );
+  } catch (error) {
+    console.error("Error during signup:", error.message);
+
+    // Prisma-specific error handling
+    if (error.code === "P2002") {
+      return new Response(
+        JSON.stringify({ error: "Email or username already exists" }),
+        { status: 400 }
+      );
     }
-    console.error(error.message)
-    return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+
+    return new Response(
+      JSON.stringify({ error: "Internal Server Error" }),
+      { status: 500 }
+    );
   }
 }

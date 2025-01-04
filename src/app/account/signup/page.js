@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -28,8 +29,20 @@ export default function Signup() {
       // Send signup request to the API
       const response = await axios.post('/api/auth/signup', formData);
       if (response.status === 201) {
-        setSuccess('Signup successful! You can now log in.');
+        setSuccess('Signup successful! Logging you in...');
         setFormData({ email: '', username: '', password: '', name: '' });
+
+        // Automatically log the user in after signup
+        const loginResult = await signIn('credentials', {
+          redirect: true,
+          username: formData.username,
+          password: formData.password,
+          callbackUrl: '/', // Redirect to home or desired page after login
+        });
+
+        if (loginResult?.error) {
+          setError('Signup successful, but login failed. Please log in manually.');
+        }
       }
     } catch (err) {
       setError(err.response?.data?.error || 'Something went wrong. Please try again.');
@@ -61,7 +74,7 @@ export default function Signup() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-blue-300 text-gray-600 text-gray-600"
+              className="w-full px-4 py-2 mt-2 border rounded-md focus:ring focus:ring-blue-300 text-gray-600"
               required
             />
           </div>
@@ -94,12 +107,12 @@ export default function Signup() {
             Signup
           </button>
         </form>
-                  <Link
-            className="w-full px-4 py-2 font-medium text-gray-500 bg-white-600 rounded hover:bg-white-500"
-            href="/account/login"
-          >
-            Already have account?
-          </Link>
+        <Link
+          className="w-full px-4 py-2 font-medium text-gray-500 bg-white-600 rounded hover:bg-white-500"
+          href="/account/login"
+        >
+          Already have an account?
+        </Link>
       </div>
     </div>
   );

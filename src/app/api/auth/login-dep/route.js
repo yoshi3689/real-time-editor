@@ -9,6 +9,8 @@ export const prisma = new  PrismaClient()
 export async function POST(request) {
     try {
       const { username, password } = await request.json();
+      // validate email, username, password
+      
       // TODO: giving the null result error because the field username in the schema was not annotated with @unique
       const user = await prisma.user.findUnique({
         where: { username }
