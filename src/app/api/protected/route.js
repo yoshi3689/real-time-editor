@@ -1,27 +1,31 @@
-import jwt from 'jsonwebtoken';
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route"; // Adjust path as necessary
 
 export async function GET(request) {
   try {
-    // Get the cookie from the request headers
-    const cookieHeader = request.headers.get('cookie');
-    const accessTokenCookie = cookieHeader?.split('; ').find((c) => c.startsWith('access token for socket chat app='));
-    const token = accessTokenCookie?.split('=')[1];
+    // Get the session using NextAuth
+    const session = await getServerSession(authOptions);
 
-    if (!token) {
-      return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
+    if (!session) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
     }
 
-    // Verify the token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    return new Response(JSON.stringify({ message: 'You are logged in', user: decoded }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    // Respond with user information from the session
+    return new Response(
+      JSON.stringify({
+        message: "You are logged in",
+        user: session.user, // This includes id, email, and name
+      }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
   } catch (err) {
-    console.error('Error verifying JWT:', err);
-    return new Response(JSON.stringify({ error: 'Invalid or expired token' }), {
-      status: 403,
-    });
+    console.error("Error verifying session:", err);
+    return new Response(
+      JSON.stringify({ error: "Internal Server Error" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
 }
