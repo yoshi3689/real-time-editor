@@ -1,0 +1,327 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 debug pnpm:package-manifest": {
+    "initial": {
+      "name": "socket-chat-practice-nextjs",
+      "version": "0.1.0",
+      "private": true,
+      "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+      },
+      "dependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "next": "15.0.4"
+      },
+      "devDependencies": {
+        "typescript": "^5",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "postcss": "^8",
+        "tailwindcss": "^3.4.1",
+        "eslint": "^8",
+        "eslint-config-next": "15.0.4"
+      }
+    },
+    "prefix": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs"
+  },
+  "2 debug pnpm:context": {
+    "currentLockfileExists": false,
+    "storeDir": "/Users/yoshi/.pnpm-store/v3",
+    "virtualStoreDir": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs/node_modules/.pnpm"
+  },
+  "3 debug pnpm:stage": {
+    "prefix": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "stage": "resolution_started"
+  },
+  "4 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/postcss/8.4.49",
+    "wanted": {
+      "dependentId": ".",
+      "name": "postcss",
+      "rawSpec": "^8"
+    }
+  },
+  "5 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/postcss/8.4.49",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "resolved"
+  },
+  "6 debug pnpm:fetching-progress": {
+    "attempt": 1,
+    "packageId": "registry.npmjs.org/postcss/8.4.49",
+    "size": 47128,
+    "status": "started"
+  },
+  "7 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/@types/react-dom/19.0.2",
+    "wanted": {
+      "dependentId": ".",
+      "name": "@types/react-dom",
+      "rawSpec": "^19"
+    }
+  },
+  "8 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@types/react-dom/19.0.2",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "resolved"
+  },
+  "9 debug pnpm:fetching-progress": {
+    "attempt": 1,
+    "packageId": "registry.npmjs.org/@types/react-dom/19.0.2",
+    "size": 6012,
+    "status": "started"
+  },
+  "10 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@types/react-dom/19.0.2",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "fetched"
+  },
+  "11 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/postcss/8.4.49",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "fetched"
+  },
+  "12 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/@types/react/19.0.1",
+    "wanted": {
+      "dependentId": ".",
+      "name": "@types/react",
+      "rawSpec": "^19"
+    }
+  },
+  "13 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@types/react/19.0.1",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "resolved"
+  },
+  "14 debug pnpm:fetching-progress": {
+    "attempt": 1,
+    "packageId": "registry.npmjs.org/@types/react/19.0.1",
+    "size": 143325,
+    "status": "started"
+  },
+  "15 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@types/react/19.0.1",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "fetched"
+  },
+  "16 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/eslint/8.57.1",
+    "wanted": {
+      "dependentId": ".",
+      "name": "eslint",
+      "rawSpec": "^8"
+    }
+  },
+  "17 debug pnpm:deprecation": {
+    "deprecated": "This version is no longer supported. Please see https://eslint.org/version-support for other options.",
+    "depth": 0,
+    "pkgId": "registry.npmjs.org/eslint/8.57.1",
+    "pkgName": "eslint",
+    "pkgVersion": "8.57.1",
+    "prefix": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs"
+  },
+  "18 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/eslint/8.57.1",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "resolved"
+  },
+  "19 debug pnpm:fetching-progress": {
+    "attempt": 1,
+    "packageId": "registry.npmjs.org/eslint/8.57.1",
+    "size": 566631,
+    "status": "started"
+  },
+  "20 debug pnpm:update-check": {
+    "currentVersion": "6.11.0",
+    "latestVersion": "9.15.0"
+  },
+  "21 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/@types/node/20.17.9",
+    "wanted": {
+      "dependentId": ".",
+      "name": "@types/node",
+      "rawSpec": "^20"
+    }
+  },
+  "22 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@types/node/20.17.9",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "resolved"
+  },
+  "23 debug pnpm:fetching-progress": {
+    "attempt": 1,
+    "packageId": "registry.npmjs.org/@types/node/20.17.9",
+    "size": 407065,
+    "status": "started"
+  },
+  "24 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@types/node/20.17.9",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "fetched"
+  },
+  "25 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/react/19.0.0",
+    "wanted": {
+      "dependentId": ".",
+      "name": "react",
+      "rawSpec": "^19.0.0"
+    }
+  },
+  "26 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/react/19.0.0",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "resolved"
+  },
+  "27 debug pnpm:fetching-progress": {
+    "attempt": 1,
+    "packageId": "registry.npmjs.org/react/19.0.0",
+    "size": 31101,
+    "status": "started"
+  },
+  "28 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/react/19.0.0",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "fetched"
+  },
+  "29 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/eslint/8.57.1",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "fetched"
+  },
+  "30 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/react-dom/19.0.0",
+    "wanted": {
+      "dependentId": ".",
+      "name": "react-dom",
+      "rawSpec": "^19.0.0"
+    }
+  },
+  "31 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/react-dom/19.0.0",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "resolved"
+  },
+  "32 debug pnpm:fetching-progress": {
+    "attempt": 1,
+    "packageId": "registry.npmjs.org/react-dom/19.0.0",
+    "size": 1131663,
+    "status": "started"
+  },
+  "33 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/eslint-config-next/15.0.4",
+    "wanted": {
+      "dependentId": ".",
+      "name": "eslint-config-next",
+      "rawSpec": "15.0.4"
+    }
+  },
+  "34 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/eslint-config-next/15.0.4",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "resolved"
+  },
+  "35 debug pnpm:fetching-progress": {
+    "attempt": 1,
+    "packageId": "registry.npmjs.org/eslint-config-next/15.0.4",
+    "size": 1967,
+    "status": "started"
+  },
+  "36 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/eslint-config-next/15.0.4",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "fetched"
+  },
+  "37 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/react-dom/19.0.0",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "fetched"
+  },
+  "38 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/tailwindcss/3.4.16",
+    "wanted": {
+      "dependentId": ".",
+      "name": "tailwindcss",
+      "rawSpec": "^3.4.1"
+    }
+  },
+  "39 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/tailwindcss/3.4.16",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "resolved"
+  },
+  "40 debug pnpm:fetching-progress": {
+    "attempt": 1,
+    "packageId": "registry.npmjs.org/tailwindcss/3.4.16",
+    "size": 851979,
+    "status": "started"
+  },
+  "41 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/tailwindcss/3.4.16",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "fetched"
+  },
+  "42 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/typescript/5.7.2",
+    "wanted": {
+      "dependentId": ".",
+      "name": "typescript",
+      "rawSpec": "^5"
+    }
+  },
+  "43 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/typescript/5.7.2",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "resolved"
+  },
+  "44 debug pnpm:fetching-progress": {
+    "attempt": 1,
+    "packageId": "registry.npmjs.org/typescript/5.7.2",
+    "size": 4231797,
+    "status": "started"
+  },
+  "45 debug pnpm:request-retry": {
+    "attempt": 1,
+    "error": {
+      "message": "Response timeout while trying to fetch https://registry.npmjs.org/next (over 60000ms)",
+      "type": "body-timeout"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 10000,
+    "url": "https://registry.npmjs.org/next"
+  },
+  "46 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/typescript/5.7.2",
+    "requester": "/Users/yoshi/web-dev/real-time-stuff/socket-chat/socket-chat-practice-nextjs",
+    "status": "fetched"
+  },
+  "47 debug pnpm:request-retry": {
+    "attempt": 2,
+    "error": {
+      "message": "Response timeout while trying to fetch https://registry.npmjs.org/next (over 60000ms)",
+      "type": "body-timeout"
+    },
+    "maxRetries": 2,
+    "method": "GET",
+    "timeout": 60000,
+    "url": "https://registry.npmjs.org/next"
+  },
+  "48 error pnpm": {
+    "code": "ERR_PNPM_BROKEN_METADATA_JSON",
+    "pkgsStack": [],
+    "err": {
+      "name": "Error",
+      "message": "Response timeout while trying to fetch https://registry.npmjs.org/next (over 60000ms)",
+      "code": "ERR_PNPM_BROKEN_METADATA_JSON",
+      "stack": "Error: Response timeout while trying to fetch https://registry.npmjs.org/next (over 60000ms)\n    at RetryOperation._fn (/Users/yoshi/.node/corepack/pnpm/6.11.0/dist/pnpm.cjs:79610:36)"
+    }
+  }
+}

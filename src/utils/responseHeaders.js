@@ -1,0 +1,1 @@
+export const contentJSON = { 'Content-Type': 'application/json' };

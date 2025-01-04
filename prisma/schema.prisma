@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_PATH")
+}
+
+model User {
+  id                     String    @id @default(uuid())
+  email                  String    @unique
+  createdAt              DateTime  @default(now())
+  name                   String
+  username               String    @unique
+  password               String
+  isEmailVerified         Boolean
+  isVerificationEmailSent Boolean
+  messages               Message[]
+}
+
+model Message {
+  id           Int      @id @default(autoincrement())
+  clientOffset String   @unique
+  createdAt    DateTime @default(now())
+  content      String
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+}
