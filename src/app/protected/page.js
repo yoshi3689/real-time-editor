@@ -1,12 +1,15 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 export default function ProtectedPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-
+  const handleLogout = async () => {
+    // Log the user out and redirect to the home page
+    await signOut({ callbackUrl: '/account/login' });
+  };
   if (status === 'loading') {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -74,6 +77,14 @@ export default function ProtectedPage() {
               </a>
             </li>
           </ul>
+        </div>
+        <div className="mt-6 text-center">
+          <button
+            onClick={handleLogout}
+            className="px-4 py-2 font-medium text-white bg-red-600 rounded hover:bg-red-700"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </div>

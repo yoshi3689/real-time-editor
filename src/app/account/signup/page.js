@@ -1,11 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useSession, signIn } from 'next-auth/react';
 
 export default function Signup() {
+  const { data: session, status } = useSession(); // Use session to check authentication status
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     username: '',
@@ -14,6 +17,16 @@ export default function Signup() {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  useEffect(() => {
+    // If the user is already logged in, redirect them to `/protected`
+    if (status === 'authenticated') {
+      setSuccess('You are already logged in. Redirecting to your account...');
+      setTimeout(() => {
+        router.push('/protected');
+      }, 1000); // Redirect after 3 seconds
+    }
+  }, [status, router]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +37,7 @@ export default function Signup() {
     e.preventDefault();
     setError('');
     setSuccess('');
+    setIsRedirecting(false);
 
     try {
       // Send signup request to the API
@@ -34,20 +48,49 @@ export default function Signup() {
 
         // Automatically log the user in after signup
         const loginResult = await signIn('credentials', {
-          redirect: true,
+          redirect: false, // Prevent automatic redirection
           username: formData.username,
           password: formData.password,
-          callbackUrl: '/', // Redirect to home or desired page after login
         });
 
         if (loginResult?.error) {
           setError('Signup successful, but login failed. Please log in manually.');
+        } else {
+          setSuccess('Signup successful! Redirecting to your account...');
+          setIsRedirecting(true);
+
+          // Redirect after showing success message
+          setTimeout(() => {
+            router.push('/protected'); // Redirect to the protected page
+          }, 3000); // Wait 3 seconds before redirecting
         }
       }
     } catch (err) {
       setError(err.response?.data?.error || 'Something went wrong. Please try again.');
     }
   };
+
+  if (status === "authenticated") {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-green-600">Redirecting...</h1>
+          <p className="mt-4 text-gray-600">{success}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === 'loading') {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800">Loading...</h1>
+          <p className="mt-4 text-gray-600">Checking authentication status...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

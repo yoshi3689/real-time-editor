@@ -1,15 +1,25 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function LoginPage() {
+  const { data: session, status } = useSession();
   const router = useRouter();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  useEffect(() => {
+  if (status === 'authenticated') {
+    setTimeout(() => {
+      router.push('/protected');
+    }, 1000);
+  }
+}, [status, router]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,6 +44,28 @@ export default function LoginPage() {
     }
   };
 
+  if (status === 'loading') {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800">Loading...</h1>
+          <p className="mt-4 text-gray-600">Please wait...</p>
+        </div>
+      </div>
+    );
+  }
+  else if (status === 'authenticated') {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-green-600">Already Logged In</h1>
+          <p className="mt-4 text-gray-600">
+            You are already logged in. Redirecting to your protected page...
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-4 bg-white rounded shadow-lg">
